@@ -74,16 +74,15 @@ if not args.skip_matching:
         --image_path "  + args.source_path + "/input \
         --output_path "  + args.source_path + "/distorted/sparse \
         --Mapper.ba_global_function_tolerance=0.000001 \
-        # --Mapper.min_model_size 200 \
-        # --Mapper.num_threads 16 \
-        # --Mapper.init_min_tri_angle 4 \
-        # --Mapper.multiple_models 0 \
-        # --Mapper.extract_colors 0 \
-        # --Mapper.ba_global_images_ratio=1.2 \
-        # --Mapper.ba_global_points_ratio=1.2 \
-        # --Mapper.ba_global_max_num_iterations=20 \
-        # --Mapper.ba_global_max_refinements=3 \
-        # --Mapper.ba_global_points_freq=200000"
+        --Mapper.num_threads 16 \
+        --Mapper.init_min_tri_angle 4 \
+        --Mapper.multiple_models 0 \
+        --Mapper.extract_colors 0 \
+        --Mapper.ba_global_images_ratio=1.2 \
+        --Mapper.ba_global_points_ratio=1.2 \
+        --Mapper.ba_global_max_num_iterations=20 \
+        --Mapper.ba_global_max_refinements=3 \
+        --Mapper.ba_global_points_freq=200000"
         )
     exit_code = os.system(mapper_cmd)
     if exit_code != 0:
