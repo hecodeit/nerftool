@@ -68,12 +68,15 @@ if not args.skip_matching:
     ### Bundle adjustment
     # The default Mapper tolerance is unnecessarily large,
     # decreasing it speeds up bundle adjustment steps.
+    # https://github.com/city-super/Scaffold-GS/blob/main/SIBR_viewers/src/projects/dataset_tools/preprocess/fullColmapProcess/SelectiveColmapProcessSteps.json
     mapper_cmd = (colmap_command + " mapper \
         --database_path " + args.source_path + "/distorted/database.db \
         --image_path "  + args.source_path + "/input \
         --output_path "  + args.source_path + "/distorted/sparse \
+        --Mapper.num_threads 16 \
+        --Mapper.init_min_tri_angle 4 \
         --Mapper.multiple_models 0 \
-        --Mapper.ba_global_function_tolerance=0.000001 \
+        --Mapper.extract_colors 0 \
         --Mapper.ba_global_images_ratio=1.2 \
         --Mapper.ba_global_points_ratio=1.2 \
         --Mapper.ba_global_max_num_iterations=20 \
