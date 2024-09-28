@@ -72,6 +72,7 @@ if not args.skip_matching:
         --database_path " + args.source_path + "/distorted/database.db \
         --image_path "  + args.source_path + "/input \
         --output_path "  + args.source_path + "/distorted/sparse \
+        --Mapper.multiple_models 0 \
         --Mapper.ba_global_function_tolerance=0.000001 \
         --Mapper.ba_global_images_ratio=1.2 \
         --Mapper.ba_global_points_ratio=1.2 \
