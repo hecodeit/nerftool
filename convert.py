@@ -23,7 +23,7 @@ parser.add_argument("--camera", default="OPENCV", type=str)
 parser.add_argument("--colmap_executable", default="", type=str)
 parser.add_argument("--resize", action="store_true")
 parser.add_argument("--magick_executable", default="", type=str)
-parser.add_argument("--min_model_size", default="200", type=str)
+parser.add_argument("--min_model_size", default=200, type=int)
 args = parser.parse_args()
 colmap_command = '"{}"'.format(args.colmap_executable) if len(args.colmap_executable) > 0 else "colmap"
 magick_command = '"{}"'.format(args.magick_executable) if len(args.magick_executable) > 0 else "magick"
@@ -80,7 +80,7 @@ if not args.skip_matching:
         --Mapper.ba_global_max_num_iterations=20 \
         --Mapper.ba_global_max_refinements=3 \
         --Mapper.ba_global_points_freq=200000 \
-        --Mapper.min_model_size " + args.min_model_size
+        --Mapper.min_model_size " + str(args.min_model_size)
         )
     exit_code = os.system(mapper_cmd)
     if exit_code != 0:
