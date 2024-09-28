@@ -73,6 +73,7 @@ if not args.skip_matching:
         --database_path " + args.source_path + "/distorted/database.db \
         --image_path "  + args.source_path + "/input \
         --output_path "  + args.source_path + "/distorted/sparse \
+        --Mapper.min_model_size 200 \
         --Mapper.num_threads 16 \
         --Mapper.init_min_tri_angle 4 \
         --Mapper.multiple_models 0 \
