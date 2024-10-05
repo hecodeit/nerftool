@@ -1,5 +1,6 @@
 import os
 import shutil
+import argparse
 
 def move_and_rename_files(subfolder, parent_folder):
     # Get the name of the subfolder
@@ -20,7 +21,14 @@ def move_and_rename_files(subfolder, parent_folder):
             shutil.move(file_path, new_file_path)
             print(f"Moved: {file_path} to {new_file_path}")
 
-# Example usage
-subfolder = 'path/to/subfolder'
-parent_folder = 'path/to/parent_folder'
-move_and_rename_files(subfolder, parent_folder)
+# Set up argument parsing
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Move and rename files from a subfolder to a parent folder.")
+    parser.add_argument('subfolder', type=str, help="Path to the subfolder containing files to move.")
+    parser.add_argument('parent_folder', type=str, help="Path to the parent folder where files will be moved.")
+
+    # Parse the arguments
+    args = parser.parse_args()
+
+    # Call the function with parsed arguments
+    move_and_rename_files(args.subfolder, args.parent_folder)
