@@ -20,3 +20,8 @@ If you have COLMAP and ImageMagick on your system path, you can simply run
 ```
 python convert.py -s <location> [--resize] #If not resizing, ImageMagick is not needed
 ```
+
+## video_to_jpg.py
+```
+python video_to_jpg.py C:\Users\yulei\Desktop\10-20\DJI_001\DJI_20241020122229_0129_D.MP4 C:\Users\yulei\Desktop\10-20\DJI_001\jpgs\output_%04d.jpg
+```
