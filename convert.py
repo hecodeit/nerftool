@@ -24,7 +24,7 @@ parser.add_argument("--colmap_executable", default="", type=str)
 parser.add_argument("--resize", action="store_true")
 parser.add_argument("--magick_executable", default="", type=str)
 parser.add_argument("--min_model_size", default=200, type=int)
-parser.add_argument("--undistortion", action="store_true")
+parser.add_argument("--undistortion", action="store_false")
 args = parser.parse_args()
 colmap_command = '"{}"'.format(args.colmap_executable) if len(args.colmap_executable) > 0 else "colmap"
 magick_command = '"{}"'.format(args.magick_executable) if len(args.magick_executable) > 0 else "magick"
