@@ -23,8 +23,8 @@ parser.add_argument("--camera", default="OPENCV", type=str)
 parser.add_argument("--colmap_executable", default="", type=str)
 parser.add_argument("--resize", action="store_true")
 parser.add_argument("--magick_executable", default="", type=str)
-parser.add_argument("--min_model_size", default=200, type=int)
-parser.add_argument("--undistortion", action="store_false")
+parser.add_argument("--min_model_size", default=50, type=int)
+parser.add_argument("--undistortion", action="store_true")
 args = parser.parse_args()
 colmap_command = '"{}"'.format(args.colmap_executable) if len(args.colmap_executable) > 0 else "colmap"
 magick_command = '"{}"'.format(args.magick_executable) if len(args.magick_executable) > 0 else "magick"
@@ -88,27 +88,31 @@ if not args.skip_matching:
         logging.error(f"Mapper failed with code {exit_code}. Exiting.")
         exit(exit_code)
 
-### Image undistortion
-## We need to undistort our images into ideal pinhole intrinsics.
-img_undist_cmd = (colmap_command + " image_undistorter \
-    --image_path " + args.source_path + "/input \
-    --input_path " + args.source_path + "/distorted/sparse/0 \
-    --output_path " + args.source_path + "\
-    --output_type COLMAP")
-exit_code = os.system(img_undist_cmd)
-if exit_code != 0:
-    logging.error(f"Mapper failed with code {exit_code}. Exiting.")
-    exit(exit_code)
+if(args.resize):
+    ### Image undistortion
+    ## We need to undistort our images into ideal pinhole intrinsics.
+    img_undist_cmd = (colmap_command + " image_undistorter \
+        --image_path " + args.source_path + "/input \
+        --input_path " + args.source_path + "/distorted/sparse/0 \
+        --output_path " + args.source_path + "\
+        --output_type COLMAP")
+    exit_code = os.system(img_undist_cmd)
+    if exit_code != 0:
+        logging.error(f"Mapper failed with code {exit_code}. Exiting.")
+        exit(exit_code)
 
-files = os.listdir(args.source_path + "/sparse")
-os.makedirs(args.source_path + "/sparse/0", exist_ok=True)
-# Copy each file from the source directory to the destination directory
-for file in files:
-    if file == '0':
-        continue
-    source_file = os.path.join(args.source_path, "sparse", file)
-    destination_file = os.path.join(args.source_path, "sparse", "0", file)
-    shutil.move(source_file, destination_file)
+    files = os.listdir(args.source_path + "/sparse")
+    os.makedirs(args.source_path + "/sparse/0", exist_ok=True)
+    # Copy each file from the source directory to the destination directory
+    for file in files:
+        if file == '0':
+            continue
+        source_file = os.path.join(args.source_path, "sparse", file)
+        destination_file = os.path.join(args.source_path, "sparse", "0", file)
+        shutil.move(source_file, destination_file)
+else:
+    shutil.move(args.source_path + "/distorted/sparse/0", args.source_path + "/sparse/0")
+    shutil.move(args.source_path + "/input", args.source_path + "/images")
 
 if(args.resize):
     print("Copying and resizing...")
