@@ -88,7 +88,7 @@ if not args.skip_matching:
         logging.error(f"Mapper failed with code {exit_code}. Exiting.")
         exit(exit_code)
 
-if(args.resize):
+if(args.undistortion):
     ### Image undistortion
     ## We need to undistort our images into ideal pinhole intrinsics.
     img_undist_cmd = (colmap_command + " image_undistorter \
