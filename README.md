@@ -24,4 +24,13 @@ python convert.py -s <location> [--resize] #If not resizing, ImageMagick is not 
 ## video_to_jpg.py
 ```
 python video_to_jpg.py C:\Users\yulei\Desktop\10-20\DJI_001\DJI_20241020122229_0129_D.MP4 C:\Users\yulei\Desktop\10-20\DJI_001\jpgs\output_%04d.jpg
+
+python video_to_jpg.py /Users/yulei/Desktop/11-09/DJI_20241109120748_0003_D.MP4 /Users/yulei/Desktop/11-09/11-09-three/%04d.jpg
+```
+
+## camera_alignment
+```
+python camera_alignmant.py path/to/the/project/directory
+
+python add_new_images.py /Users/yulei/Desktop/test/wall-d /Users/yulei/Desktop/test/top-b /Users/yulei/Desktop/test/salon-zeus
 ```
